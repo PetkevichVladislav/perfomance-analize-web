@@ -27,7 +27,7 @@ const MainPage: React.FC = () => {
     };
 
     const sendRequest = (url: string, email: string, type: string): void => {
-        const functionUrl = "https://light-house-perfomance-report.azurewebsites.net/api/analize?code=BYculP8VGfesTG4_7MTRWwunhVAMSODdTnOIufPP2OFHAzFu_z5ImQ==";
+        const functionUrl = "";
 
         const requestBody: RequestBody = {
             url: url,
