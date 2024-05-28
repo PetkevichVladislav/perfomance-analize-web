@@ -70,38 +70,35 @@ const MainPage: React.FC = () => {
     return (
         <div className="main-container">
             <div className="content-container">
-                <div id="form-container" className="form-container">
-                    <h3>Performance Adviser</h3>
-                    <h6>Fill form and wait for results.</h6>
+                <div id="form-container" className="form-container container">
+                    <h3 className="text">Performance Adviser</h3>
                     <form id="myForm" className="form needs-validation" noValidate onSubmit={validateAndSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="siteUrl">Site URL</label>
+                        <div className="input-data form-row">
                             <input
-                                type="url"
-                                className="form-control"
-                                id="siteUrl"
+                                type="text"
                                 name="url"
                                 value={advice.url}
                                 onChange={fieldChangeHandler('url')}
                                 required
                             />
+                            <div className="underline"></div>
+                            <label htmlFor="siteUrl">Site URL</label>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="email">E-mail</label>
+                        <div className="input-data form-row">
                             <input
-                                type="email"
-                                className="form-control"
+                                type="text"
                                 id="email"
                                 name="email"
                                 value={advice.email}
                                 onChange={fieldChangeHandler('email')}
                                 required
                             />
+                            <div className="underline"></div>
+                            <label htmlFor="email">E-mail</label>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="selectType">Select Type</label>
+                        <div className="input-data form-row">
                             <select
-                                className="form-control"
+                                className="form-control input-data"
                                 id="selectType"
                                 name="type"
                                 value={advice.type}
@@ -111,8 +108,10 @@ const MainPage: React.FC = () => {
                                 <option value="mobile">Mobile</option>
                                 <option value="desktop">Desktop</option>
                             </select>
+                            <div className="underline"></div>
+                            <label htmlFor="selectType">Select Type</label>
                         </div>
-                        <button type="submit" className="btn btn-info btn-lg btn-block">
+                        <button type="submit" className="submit-btn">
                             Send
                         </button>
                     </form>
