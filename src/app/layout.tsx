@@ -1,4 +1,5 @@
-import MainLayout from "@/components/MainLayout/MainLayout"
+import MainLayout from "@/components/Layouts/MainLayout/MainLayout"
+
 
 export const metadata = {
   title: 'Next.js',

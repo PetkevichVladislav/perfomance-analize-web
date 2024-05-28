@@ -44,12 +44,10 @@ const MainPage: React.FC = () => {
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            // Handle success - e.g., show success message
             setIsProcessing(false);
         })
         .catch((error) => {
             console.error('Error:', error);
-            // Handle error - e.g., show error message
             setIsProcessing(false);
         });
     };
