@@ -7,11 +7,26 @@ interface RequestBody {
     email: string;
 }
 
+interface IAdvice {
+    url: string;
+    email: string;
+    type: string;
+}
+
 const MainPage: React.FC = () => {
-    const [url, setUrl] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [type, setType] = useState<string>('mobile');
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
+    const [advice, setAdvice] = useState<IAdvice>({
+        url: '',
+        email: '',
+        type: 'mobile'
+    });
+
+    const fieldChangeHandler = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        setAdvice((advice) =>
+            ({...advice, [`${fieldName}`]: event.target.value})
+        )
+    }
 
     const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -22,16 +37,16 @@ const MainPage: React.FC = () => {
             form.classList.add('was-validated');
         } else {
             setIsProcessing(true);
-            sendRequest(url, email, type);
+            sendRequest(advice);
         }
     };
 
-    const sendRequest = (url: string, email: string, type: string): void => {
+    const sendRequest = (advice: IAdvice): void => {
         const functionUrl = "";
 
         const requestBody: RequestBody = {
-            url: url,
-            email: email,
+            url: advice.url,
+            email: advice.email,
         };
 
         fetch(functionUrl, {
@@ -66,8 +81,8 @@ const MainPage: React.FC = () => {
                                 className="form-control"
                                 id="siteUrl"
                                 name="url"
-                                value={url}
-                                onChange={(e) => setUrl(e.target.value)}
+                                value={advice.url}
+                                onChange={fieldChangeHandler('url')}
                                 required
                             />
                         </div>
@@ -78,8 +93,8 @@ const MainPage: React.FC = () => {
                                 className="form-control"
                                 id="email"
                                 name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={advice.email}
+                                onChange={fieldChangeHandler('email')}
                                 required
                             />
                         </div>
@@ -89,8 +104,8 @@ const MainPage: React.FC = () => {
                                 className="form-control"
                                 id="selectType"
                                 name="type"
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
+                                value={advice.type}
+                                onChange={fieldChangeHandler('type')}
                                 required
                             >
                                 <option value="mobile">Mobile</option>
