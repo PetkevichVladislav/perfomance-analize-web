@@ -14,19 +14,12 @@ interface IAdvice {
 }
 
 const MainPage: React.FC = () => {
-    const [isProcessing, setIsProcessing] = useState<boolean>(false);
-    const [advice, setAdvice] = useState<IAdvice>({
-        url: '',
-        email: '',
-        type: 'mobile'
-    });
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [advice, setAdvice] = useState<IAdvice>({ url: '', email: '', type: 'mobile' });
 
-    const fieldChangeHandler = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-        setAdvice((advice) =>
-            ({...advice, [`${fieldName}`]: event.target.value})
-        )
-    }
+    const fieldChangeHandler = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        setAdvice(prevAdvice => ({ ...prevAdvice, [fieldName]: event.target.value }));
+    };
 
     const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -41,30 +34,20 @@ const MainPage: React.FC = () => {
         }
     };
 
-    const sendRequest = (advice: IAdvice): void => {
-        const functionUrl = "";
-
-        const requestBody: RequestBody = {
-            url: advice.url,
-            email: advice.email,
-        };
-
-        fetch(functionUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(requestBody)
-        })
-        .then(response => response.json())
-        .then(data => {
+    const sendRequest = async (advice: IAdvice): Promise<void> => {
+        try {
+            const response = await fetch("", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: advice.url, email: advice.email } as RequestBody),
+            });
+            const data = await response.json();
             console.log('Success:', data);
-            setIsProcessing(false);
-        })
-        .catch((error) => {
+        } catch (error) {
             console.error('Error:', error);
+        } finally {
             setIsProcessing(false);
-        });
+        }
     };
 
     return (
@@ -96,9 +79,8 @@ const MainPage: React.FC = () => {
                             <div className="underline"></div>
                             <label htmlFor="email">E-mail</label>
                         </div>
-                        <div className="input-data form-row">
+                        <div className="input-data select form-row">
                             <select
-                                className="form-control input-data"
                                 id="selectType"
                                 name="type"
                                 value={advice.type}
@@ -108,12 +90,8 @@ const MainPage: React.FC = () => {
                                 <option value="mobile">Mobile</option>
                                 <option value="desktop">Desktop</option>
                             </select>
-                            <div className="underline"></div>
-                            <label htmlFor="selectType">Select Type</label>
                         </div>
-                        <button type="submit" className="submit-btn">
-                            Send
-                        </button>
+                        <button type="submit" className="submit-btn">Send</button>
                     </form>
                 </div>
                 {isProcessing && (
