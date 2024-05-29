@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import './MainPage.scss';
+import {useRouter} from "next/navigation";
 
 interface RequestBody {
     url: string;
@@ -14,6 +15,7 @@ interface IAdvice {
 }
 
 const MainPage: React.FC = () => {
+    const router = useRouter();
     const [isProcessing, setIsProcessing] = useState(false);
     const [advice, setAdvice] = useState<IAdvice>({ url: '', email: '', type: 'mobile' });
 
@@ -29,31 +31,30 @@ const MainPage: React.FC = () => {
             event.stopPropagation();
             form.classList.add('was-validated');
         } else {
-            setIsProcessing(true);
             sendRequest(advice);
         }
     };
 
     const sendRequest = async (advice: IAdvice): Promise<void> => {
+        setIsProcessing(true);
         try {
-            const response = await fetch("", {
+            const response = await fetch("/evaluate", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url: advice.url, email: advice.email } as RequestBody),
+                body: JSON.stringify(advice as RequestBody),
             });
             const data = await response.json();
             console.log('Success:', data);
+            router.push('/report/123');
         } catch (error) {
             console.error('Error:', error);
-        } finally {
-            setIsProcessing(false);
         }
     };
 
     return (
         <div className="main-container">
             <div className="content-container">
-                <div id="form-container" className="form-container container">
+                {!isProcessing && (<div id="form-container" className="form-container container">
                     <h3 className="text">Performance Adviser</h3>
                     <form id="myForm" className="form needs-validation" noValidate onSubmit={validateAndSubmit}>
                         <div className="input-data form-row">
@@ -93,11 +94,12 @@ const MainPage: React.FC = () => {
                         </div>
                         <button type="submit" className="submit-btn">Send</button>
                     </form>
-                </div>
+                </div>)}
                 {isProcessing && (
-                    <div id="processingMessage">
-                        <p className="lead">Start to processing and sending report...</p>
-                    </div>
+                    <>
+                        <div className="loader"></div>
+                        <p className="loader-text">Cloud computing... please wait</p>
+                    </>
                 )}
             </div>
             <div className="container-image"></div>
