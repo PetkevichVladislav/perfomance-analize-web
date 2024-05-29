@@ -64,7 +64,8 @@ body{
 .container{
     max-width: 800px;
     background: #fff;
-    padding: 25px 40px 10px 40px;
+    padding: 40px 40px 10px 40px;
+    border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 
     .text{
@@ -162,9 +163,8 @@ select {
     box-shadow: none;
     flex: 1;
     padding: 0 1em;
-    color: #fff;
-    background-color: var(--darkgray);
-    background-image: linear-gradient(115deg, hsla(11, 100%, 62.2%, 1), hsl(11, 100%, 62.2%), hsl(39, 100%, 68%), #9f01ea);
+    color: white;
+    background-color: #022f50;
     cursor: pointer;
 }
 
