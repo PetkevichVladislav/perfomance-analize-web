@@ -13,7 +13,7 @@ import {
   TextField,
 } from '@mui/material';
 import RocketIcon from '@mui/icons-material/Rocket';
-import {Loader} from "@/components/Loader/Loader";
+import { Loader } from '@/components/Loader/Loader';
 
 interface IReport {
   url: string;

@@ -13,7 +13,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import './Report.scss';
-import {Loader} from "@/components/Loader/Loader";
+import { Loader } from '@/components/Loader/Loader';
 
 export interface ReportParams {
   params: { id: string };
