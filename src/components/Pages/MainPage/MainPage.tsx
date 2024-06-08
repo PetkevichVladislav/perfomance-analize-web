@@ -1,24 +1,18 @@
 'use client';
-import React, {ChangeEventHandler, useState} from 'react';
+import React, { ChangeEventHandler, useState } from 'react';
 import './MainPage.scss';
 import { useRouter } from 'next/navigation';
 import {
   Box,
   Button,
-  Card, CardContent,
-  FormControl,
+  Card,
+  CardContent,
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
-  TextField
-} from "@mui/material";
+  TextField,
+} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-
-interface RequestBody {
-  url: string;
-  email: string;
-}
 
 interface IAdvice {
   url: string;
@@ -35,14 +29,12 @@ const MainPage: React.FC = () => {
     type: 'mobile',
   });
 
-  const fieldChangeHandler =
-      (fieldName: string) =>
-          (event: any) => {
-            setAdvice((prevAdvice) => ({
-              ...prevAdvice,
-              [fieldName]: event.target.value,
-            }));
-          };
+  const fieldChangeHandler = (fieldName: string) => (event: any) => {
+    setAdvice((prevAdvice) => ({
+      ...prevAdvice,
+      [fieldName]: event.target.value,
+    }));
+  };
 
   const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -62,7 +54,7 @@ const MainPage: React.FC = () => {
       const response = await fetch('/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(advice as RequestBody),
+        body: JSON.stringify(advice),
       });
       const data = await response.json();
       console.log('Success:', data);
@@ -73,49 +65,69 @@ const MainPage: React.FC = () => {
   };
 
   return (
-      <div className="main-container">
-        <div className="content-container">
-          {!isProcessing && (
-              <Card sx={{minWidth: 300, maxWidth: "90%", width: "80%"}}>
-                <CardContent>
-                  <Box className="epam-logo"/>
-                  <h3 className="form-header-title">Performance Adviser</h3>
-                  <form
-                      id="myForm"
-                      className="form needs-validation"
-                      noValidate
-                      onSubmit={validateAndSubmit}
-                  >
-                    <TextField id="input-url" label="Site url" variant="outlined"
-                               onChange={fieldChangeHandler('url')}
-                               sx={{marginBottom: "20px"}} size="small"/>
-                    <TextField id="input-email" label="E-mail" variant="outlined" size="small"
-                               onChange={fieldChangeHandler('email')} sx={{marginBottom: "20px"}}/>
-                    <InputLabel id="demo-simple-select-label">Device Type</InputLabel>
-                    <Select
-                        id="demo-simple-select"
-                        size="small"
-                        value={advice.type}
-                        onChange={fieldChangeHandler('type')}
-                        sx={{marginBottom: "20px"}}
-                    >
-                      <MenuItem value="mobile">Mobile</MenuItem>
-                      <MenuItem value="descktop">Desktop</MenuItem>
-                    </Select>
-                    <Button variant="contained" type="submit" endIcon={<SendIcon/>} sx={{backgroundColor: '#053052'}}>Get report</Button>
-                  </form>
-                </CardContent>
-              </Card>
-          )}
-          {isProcessing && (
-              <>
-                <div className="loader"></div>
-                <p className="loader-text">Cloud computing... please wait</p>
-              </>
-          )}
-        </div>
-        <div className="container-image"></div>
+    <div className="main-container">
+      <div className="content-container">
+        {!isProcessing && (
+          <Card sx={{ minWidth: 300, maxWidth: '90%', width: '80%' }}>
+            <CardContent>
+              <Box className="epam-logo" />
+              <h3 className="form-header-title">Performance Adviser</h3>
+              <form
+                id="myForm"
+                className="form needs-validation"
+                noValidate
+                onSubmit={validateAndSubmit}
+              >
+                <TextField
+                  id="input-url"
+                  label="Site url"
+                  variant="outlined"
+                  onChange={fieldChangeHandler('url')}
+                  sx={{ marginBottom: '20px' }}
+                  size="small"
+                />
+                <TextField
+                  id="input-email"
+                  label="E-mail"
+                  variant="outlined"
+                  size="small"
+                  onChange={fieldChangeHandler('email')}
+                  sx={{ marginBottom: '20px' }}
+                />
+                <InputLabel id="demo-simple-select-label">
+                  Device Type
+                </InputLabel>
+                <Select
+                  id="demo-simple-select"
+                  size="small"
+                  value={advice.type}
+                  onChange={fieldChangeHandler('type')}
+                  sx={{ marginBottom: '20px' }}
+                >
+                  <MenuItem value="mobile">Mobile</MenuItem>
+                  <MenuItem value="descktop">Desktop</MenuItem>
+                </Select>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  endIcon={<SendIcon />}
+                  sx={{ backgroundColor: '#053052' }}
+                >
+                  Get report
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        )}
+        {isProcessing && (
+          <>
+            <div className="loader"></div>
+            <p className="loader-text">Cloud computing... please wait</p>
+          </>
+        )}
       </div>
+      <div className="container-image"></div>
+    </div>
   );
 };
 
