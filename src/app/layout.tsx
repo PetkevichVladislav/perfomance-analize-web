@@ -1,9 +1,9 @@
+'use client';
 import MainLayout from '@/components/Layouts/MainLayout/MainLayout';
 
-export const metadata = {
-  title: 'Revenue Rocket 🚀',
-  description: '<EPAM.AI> App for Performance Advices',
-};
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -12,8 +12,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Revenue Rocket 🚀</title>
+      </head>
       <body>
-        <MainLayout>{children}</MainLayout>
+        <QueryClientProvider client={queryClient}>
+          <MainLayout>{children}</MainLayout>
+        </QueryClientProvider>
       </body>
     </html>
   );

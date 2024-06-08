@@ -62,7 +62,7 @@ const MainPage: React.FC = () => {
       });
       const data = await response.json();
       console.log('Success:', data);
-      router.push('/report/123');
+      window.location.href = '/report/123';
     } catch (error) {
       console.error('Error:', error);
     }
@@ -145,7 +145,7 @@ const MainPage: React.FC = () => {
         {isProcessing && (
           <>
             <div className="loader"></div>
-            <p className="loader-text">Cloud computing... please wait</p>
+            <p className="loader-text">Cloud computing... Please wait</p>
           </>
         )}
       </div>
