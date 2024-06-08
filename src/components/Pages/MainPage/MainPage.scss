@@ -24,11 +24,12 @@
 .container-image {
   flex: 1;
   width: 50%;
-  height: 100%;
+  height: 90%;
   background-color: lightblue;
   background: url('/logo.png') center/cover no-repeat;
   align-items: center;
   justify-content: center;
+  align-self: center;
 
   @media (max-width: 1000px) {
     display: none;
@@ -42,181 +43,41 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-#processingMessage {
-  display: none;
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 }
 
 .form {
   width: inherit;
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
 }
 
 body {
   min-height: 100vh;
   padding: 10px;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(115deg, hsla(39, 100%, 68%, 1) 10%, #9f01ea 90%);
-}
-.container {
-  max-width: 800px;
-  background: #fff;
-  padding: 40px 40px 10px 40px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
-  .text {
-    text-align: center;
-    font-size: 41px;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    background: -webkit-linear-gradient(
-      right,
-      #56d8e4,
-      #9f01ea,
-      #56d8e4,
-      #9f01ea
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
 }
 
-.container form {
-  padding: 30px 0 0 0;
+.form-header-title {
+  text-align: center;
+  font-size: 41px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to left, rgb(184, 150, 255) 210.5px, rgb(0, 246, 255) 309.4px, rgb(0, 255, 240) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.container form .form-row {
-  display: flex;
-  margin: 24px 0;
-  width: 100%;
-}
-
-form .form-row .input-data {
+.epam-logo {
   width: 100%;
   height: 40px;
-  margin: 0 20px;
-  position: relative;
-}
-
-.input-data input {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: none;
-  font-size: 17px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
-}
-
-.input-data input:focus ~ label,
-.textarea textarea:focus ~ label {
-  transform: translateY(-20px);
-  font-size: 14px;
-  color: #3498db;
-}
-
-.input-data label {
-  position: absolute;
-  pointer-events: none;
-  bottom: 20px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-}
-
-.textarea label {
-  width: 100%;
-  bottom: 40px;
-  background: #fff;
-}
-
-.input-data .underline {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  width: 100%;
-}
-
-.input-data .underline:before {
-  position: absolute;
-  content: '';
-  height: 2px;
-  width: 100%;
-  background: #3498db;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.input-data input:focus ~ .underline:before,
-.input-data input:valid ~ .underline:before,
-.textarea textarea:focus ~ .underline:before,
-.textarea textarea:valid ~ .underline:before {
-  transform: scale(1);
-}
-
-@media (max-width: 1000px) {
-  .content-container {
-    margin: auto;
-  }
-}
-
-select {
-  appearance: none;
-  outline: 10px red;
-  border: 0;
-  box-shadow: none;
-  flex: 1;
-  padding: 0 1em;
-  color: white;
-  background-color: #022f50;
-  cursor: pointer;
-}
-
-select::-ms-expand {
-  display: none;
-}
-
-.select {
-  position: relative;
-  display: flex;
-  width: 20em;
-  height: 3em;
-  border-radius: 0.25em;
-  overflow: hidden;
-}
-
-.select::after {
-  content: '\25BC';
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 1em;
-  background-color: #c14fc0;
-  transition: 0.25s all ease;
-  pointer-events: none;
-}
-
-.select:hover::after {
-  color: #f39c12;
-}
-
-.submit-btn {
-  width: 50%;
-  height: 46px;
-  margin: auto;
-  background-color: #c14fc0;
-  color: white;
-  border-radius: 8px;
-  border: 0;
-
-  &:hover {
-    background-color: #f39c12;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+  background-image: url("/epam_logo_light.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* HTML: <div class="loader"></div> */
@@ -252,4 +113,77 @@ select::-ms-expand {
 .loader-text {
   margin-top: 20px;
   color: white;
+  font-size: 30px;
+}
+
+
+@mixin dots($count) {
+  $text-shadow: ();
+  @for $i from 0 through $count {
+    $text-shadow: $text-shadow,
+    (-.5+(random()) * 3) + em
+    (-.5+(random()) * 3) + em
+    7px
+    hsla(random() * 360, 100%, 50%,.9);
+  }
+  text-shadow: $text-shadow;
+}
+
+html {
+  overflow: hidden;
+  background: #123;
+}
+
+body, head {
+  display: block;
+  font-size: 52px;
+  color: transparent;
+}
+
+head::before, head::after,
+body::before, body::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3em;
+  height: 3em;
+  content: '.';
+  mix-blend-mode: screen;
+  animation: 44s -27s move infinite ease-in-out alternate;
+  z-index: -1;
+}
+
+
+body::before {
+  @include dots(40);
+  animation-duration: 44s;
+  animation-delay: -27s;
+}
+
+body::after {
+  @include dots(40);
+  animation-duration: 43s;
+  animation-delay: -32s;
+}
+
+head::before {
+  @include dots(40);
+  animation-duration: 42s;
+  animation-delay: -23s;
+}
+
+head::after {
+  @include dots(40);
+  animation-duration: 41s;
+  animation-delay: -19s;
+}
+
+
+@keyframes move {
+  from {
+    transform: rotate(0deg) scale(12) translateX(-20px);
+  }
+  to {
+    transform: rotate(360deg) scale(18) translateX(20px);
+  }
 }

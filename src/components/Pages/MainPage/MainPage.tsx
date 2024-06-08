@@ -1,7 +1,19 @@
 'use client';
-import React, { useState } from 'react';
+import React, {ChangeEventHandler, useState} from 'react';
 import './MainPage.scss';
 import { useRouter } from 'next/navigation';
+import {
+  Box,
+  Button,
+  Card, CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField
+} from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 
 interface RequestBody {
   url: string;
@@ -24,13 +36,13 @@ const MainPage: React.FC = () => {
   });
 
   const fieldChangeHandler =
-    (fieldName: string) =>
-    (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      setAdvice((prevAdvice) => ({
-        ...prevAdvice,
-        [fieldName]: event.target.value,
-      }));
-    };
+      (fieldName: string) =>
+          (event: any) => {
+            setAdvice((prevAdvice) => ({
+              ...prevAdvice,
+              [fieldName]: event.target.value,
+            }));
+          };
 
   const validateAndSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -61,67 +73,49 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className="main-container">
-      <div className="content-container">
-        {!isProcessing && (
-          <div id="form-container" className="form-container container">
-            <h3 className="text">Performance Adviser</h3>
-            <form
-              id="myForm"
-              className="form needs-validation"
-              noValidate
-              onSubmit={validateAndSubmit}
-            >
-              <div className="input-data form-row">
-                <input
-                  type="text"
-                  name="url"
-                  value={advice.url}
-                  onChange={fieldChangeHandler('url')}
-                  required
-                />
-                <div className="underline"></div>
-                <label htmlFor="siteUrl">Site URL</label>
-              </div>
-              <div className="input-data form-row">
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  value={advice.email}
-                  onChange={fieldChangeHandler('email')}
-                  required
-                />
-                <div className="underline"></div>
-                <label htmlFor="email">E-mail</label>
-              </div>
-              <div className="input-data select form-row">
-                <select
-                  id="selectType"
-                  name="type"
-                  value={advice.type}
-                  onChange={fieldChangeHandler('type')}
-                  required
-                >
-                  <option value="mobile">Mobile</option>
-                  <option value="desktop">Desktop</option>
-                </select>
-              </div>
-              <button type="submit" className="submit-btn">
-                Send
-              </button>
-            </form>
-          </div>
-        )}
-        {isProcessing && (
-          <>
-            <div className="loader"></div>
-            <p className="loader-text">Cloud computing... please wait</p>
-          </>
-        )}
+      <div className="main-container">
+        <div className="content-container">
+          {!isProcessing && (
+              <Card sx={{minWidth: 300, maxWidth: "90%", width: "80%"}}>
+                <CardContent>
+                  <Box className="epam-logo"/>
+                  <h3 className="form-header-title">Performance Adviser</h3>
+                  <form
+                      id="myForm"
+                      className="form needs-validation"
+                      noValidate
+                      onSubmit={validateAndSubmit}
+                  >
+                    <TextField id="input-url" label="Site url" variant="outlined"
+                               onChange={fieldChangeHandler('url')}
+                               sx={{marginBottom: "20px"}} size="small"/>
+                    <TextField id="input-email" label="E-mail" variant="outlined" size="small"
+                               onChange={fieldChangeHandler('email')} sx={{marginBottom: "20px"}}/>
+                    <InputLabel id="demo-simple-select-label">Device Type</InputLabel>
+                    <Select
+                        id="demo-simple-select"
+                        size="small"
+                        value={advice.type}
+                        onChange={fieldChangeHandler('type')}
+                        sx={{marginBottom: "20px"}}
+                    >
+                      <MenuItem value="mobile">Mobile</MenuItem>
+                      <MenuItem value="descktop">Desktop</MenuItem>
+                    </Select>
+                    <Button variant="contained" type="submit" endIcon={<SendIcon/>} sx={{backgroundColor: '#053052'}}>Get report</Button>
+                  </form>
+                </CardContent>
+              </Card>
+          )}
+          {isProcessing && (
+              <>
+                <div className="loader"></div>
+                <p className="loader-text">Cloud computing... please wait</p>
+              </>
+          )}
+        </div>
+        <div className="container-image"></div>
       </div>
-      <div className="container-image"></div>
-    </div>
   );
 };
 
