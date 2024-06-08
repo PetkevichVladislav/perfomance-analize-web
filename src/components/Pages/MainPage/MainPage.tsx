@@ -12,20 +12,24 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
+import RocketIcon from '@mui/icons-material/Rocket';
 
-interface IAdvice {
+interface IReport {
   url: string;
-  email: string;
+  visitors: string;
+  views: string;
+  ads: string;
   type: string;
 }
 
 const MainPage: React.FC = () => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [advice, setAdvice] = useState<IAdvice>({
+  const [advice, setAdvice] = useState<IReport>({
     url: '',
-    email: '',
+    visitors: '',
+    views: '',
+    ads: '',
     type: 'mobile',
   });
 
@@ -48,7 +52,7 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const sendRequest = async (advice: IAdvice): Promise<void> => {
+  const sendRequest = async (advice: IReport): Promise<void> => {
     setIsProcessing(true);
     try {
       const response = await fetch('/evaluate', {
@@ -71,7 +75,7 @@ const MainPage: React.FC = () => {
           <Card sx={{ minWidth: 300, maxWidth: '90%', width: '80%' }}>
             <CardContent>
               <Box className="epam-logo" />
-              <h3 className="form-header-title">Performance Adviser</h3>
+              <h3 className="form-header-title">Revenue Rocket 🚀</h3>
               <form
                 id="myForm"
                 className="form needs-validation"
@@ -80,19 +84,38 @@ const MainPage: React.FC = () => {
               >
                 <TextField
                   id="input-url"
-                  label="Site url"
+                  label="Site URL"
                   variant="outlined"
                   onChange={fieldChangeHandler('url')}
                   sx={{ marginBottom: '20px' }}
                   size="small"
                 />
                 <TextField
-                  id="input-email"
-                  label="E-mail"
+                  id="input-visitors"
+                  label="Visitors per month"
+                  variant="outlined"
+                  onChange={fieldChangeHandler('visitors')}
+                  sx={{ marginBottom: '20px' }}
+                  size="small"
+                  type="number"
+                />
+                <TextField
+                  id="input-views"
+                  label="Page views per visit"
+                  variant="outlined"
+                  onChange={fieldChangeHandler('views')}
+                  sx={{ marginBottom: '20px' }}
+                  size="small"
+                  type="number"
+                />
+                <TextField
+                  id="input-ads"
+                  label="Ads per page"
                   variant="outlined"
                   size="small"
-                  onChange={fieldChangeHandler('email')}
+                  onChange={fieldChangeHandler('ads')}
                   sx={{ marginBottom: '20px' }}
+                  type="number"
                 />
                 <InputLabel id="demo-simple-select-label">
                   Device Type
@@ -110,7 +133,7 @@ const MainPage: React.FC = () => {
                 <Button
                   variant="contained"
                   type="submit"
-                  endIcon={<SendIcon />}
+                  endIcon={<RocketIcon />}
                   sx={{ backgroundColor: '#053052' }}
                 >
                   Get report
