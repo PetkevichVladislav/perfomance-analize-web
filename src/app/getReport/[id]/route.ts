@@ -9,7 +9,7 @@ interface Context {
 export async function GET(_request: NextRequest, context: Context) {
   console.log(context.params.id);
 
-  await new Promise((resolve) => setTimeout(() => resolve(''), 300));
+  await new Promise((resolve) => setTimeout(() => resolve(''), 0));
   return Response.json({
     performance: {
       performance: 64,

@@ -13,6 +13,7 @@ import {
   TextField,
 } from '@mui/material';
 import RocketIcon from '@mui/icons-material/Rocket';
+import {Loader} from "@/components/Loader/Loader";
 
 interface IReport {
   url: string;
@@ -144,8 +145,7 @@ const MainPage: React.FC = () => {
         )}
         {isProcessing && (
           <>
-            <div className="loader"></div>
-            <p className="loader-text">Cloud computing... Please wait</p>
+            <Loader />
           </>
         )}
       </div>

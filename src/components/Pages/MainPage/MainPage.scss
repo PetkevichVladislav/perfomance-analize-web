@@ -85,42 +85,6 @@ body {
   background-position: center;
 }
 
-/* HTML: <div class="loader"></div> */
-.loader {
-  width: 108px;
-  height: 60px;
-  color: #269af2;
-  --c: radial-gradient(farthest-side, currentColor 96%, #0000);
-  background:
-    var(--c) 100% 100% /30% 60%,
-    var(--c) 70% 0 /50% 100%,
-    var(--c) 0 100% /36% 68%,
-    var(--c) 27% 18% /26% 40%,
-    linear-gradient(currentColor 0 0) bottom/67% 58%;
-  background-repeat: no-repeat;
-  position: relative;
-}
-.loader:after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: inherit;
-  opacity: 0.4;
-  animation: l7 1s infinite;
-}
-@keyframes l7 {
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-.loader-text {
-  margin-top: 20px;
-  color: white;
-  font-size: 30px;
-}
-
 @mixin dots($count) {
   $text-shadow: ();
   @for $i from 0 through $count {
@@ -137,7 +101,6 @@ body {
 }
 
 html {
-  overflow: hidden;
   background: #123;
 }
 
@@ -196,78 +159,12 @@ head::after {
   }
 }
 
-// report
-.report-container {
-  width: 100%;
-  min-height: 98vh;
-}
-
-.main-metrics {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 0 20px;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-
-.metric-name {
-  font-size: 30px;
-}
-
-.metric-value {
+.loader {
+  color: white;
+  width: fit-content;
+  height: fit-content;
+  transition: all 0.4s;
   font-size: 20px;
-  padding-top: 20px;
-}
-
-.report-block-title {
-  font-size: 30px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  margin-left: 20px;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(
-    to left,
-    rgb(184, 150, 255) 80.5px,
-    rgb(0, 246, 255) 2.4px,
-    rgb(0, 255, 240) 40%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.report-block {
-  margin-top: 20px;
-}
-
-.performance-metrics {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.performance-card {
-  max-width: 80%;
-  width: 300px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-
-.performance-score {
-  font-size: 30px;
-  border: 5px solid;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.performance-name {
-  font-size: 20px;
-  padding-top: 15px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.38);
 }

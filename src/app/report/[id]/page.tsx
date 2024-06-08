@@ -12,7 +12,8 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
-import '../../../components/Pages/MainPage/MainPage.scss';
+import './Report.scss';
+import {Loader} from "@/components/Loader/Loader";
 
 export interface ReportParams {
   params: { id: string };
@@ -42,8 +43,7 @@ export default function Report({ params }: ReportParams) {
           flexDirection: 'column',
         }}
       >
-        <div className="loader"></div>
-        <p className="loader-text">Cloud computing... Please wait</p>
+        <Loader />
       </Box>
     );
   }
