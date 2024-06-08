@@ -1,8 +1,8 @@
-import {NextRequest} from "next/server";
+import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-    const data = await request.json();
+  const data = await request.json();
 
-    await new Promise(resolve => setTimeout(() => resolve(data), 5000))
-    return Response.json(data);
+  await new Promise((resolve) => setTimeout(() => resolve(data), 5000));
+  return Response.json(data);
 }

@@ -1,245 +1,255 @@
 :root {
-    --background-gradient: linear-gradient(178deg, #ffff33 10%, #3333ff);
-    --gray: #34495e;
-    --darkgray: #2c3e50;
+  --background-gradient: linear-gradient(178deg, #ffff33 10%, #3333ff);
+  --gray: #34495e;
+  --darkgray: #2c3e50;
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    outline: none;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
 }
 
-.main-container{
-    width: 100%;
-    height: 100vh;
-    display:flex;
-    margin: 0;
-    flex-direction: row;
+.main-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin: 0;
+  flex-direction: row;
 }
 
-.container-image{
-    flex:1;
-    width: 50%;
-    height: 100%;
-    background-color: lightblue;
-    background: url('/logo.png') center/cover no-repeat;
-    align-items: center;
-    justify-content: center;
+.container-image {
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  background-color: lightblue;
+  background: url('/logo.png') center/cover no-repeat;
+  align-items: center;
+  justify-content: center;
 
-    @media (max-width: 1000px) {
-        display: none;
-    }
-}
-
-.content-container{
-    display: flex;
-    height: 100%;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-#processingMessage{
+  @media (max-width: 1000px) {
     display: none;
+  }
 }
 
-.form{
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+.content-container {
+  display: flex;
+  height: 100%;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-body{
-    min-height: 100vh;
-    padding: 10px;
+#processingMessage {
+  display: none;
+}
+
+.form {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+body {
+  min-height: 100vh;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(115deg, hsla(39, 100%, 68%, 1) 10%, #9f01ea 90%);
+}
+.container {
+  max-width: 800px;
+  background: #fff;
+  padding: 40px 40px 10px 40px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  .text {
+    text-align: center;
+    font-size: 41px;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(115deg, hsla(39, 100%, 68%, 1) 10%, #9f01ea 90%);
-}
-.container{
-    max-width: 800px;
-    background: #fff;
-    padding: 40px 40px 10px 40px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-
-    .text{
-        text-align: center;
-        font-size: 41px;
-        font-weight: 600;
-        font-family: 'Poppins', sans-serif;
-        background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    background: -webkit-linear-gradient(
+      right,
+      #56d8e4,
+      #9f01ea,
+      #56d8e4,
+      #9f01ea
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
-.container form{
-    padding: 30px 0 0 0;
+.container form {
+  padding: 30px 0 0 0;
 }
 
-.container form .form-row{
-    display: flex;
-    margin: 24px 0;
-    width: 100%;
+.container form .form-row {
+  display: flex;
+  margin: 24px 0;
+  width: 100%;
 }
 
-form .form-row .input-data{
-    width: 100%;
-    height: 40px;
-    margin: 0 20px;
-    position: relative;
+form .form-row .input-data {
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
 }
 
-.input-data input{
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-    font-size: 17px;
-    border-bottom: 2px solid rgba(0,0,0, 0.12);
+.input-data input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
 }
 
-.input-data input:focus ~ label, .textarea textarea:focus ~ label{
-    transform: translateY(-20px);
-    font-size: 14px;
-    color: #3498db;
+.input-data input:focus ~ label,
+.textarea textarea:focus ~ label {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #3498db;
 }
 
-.input-data label{
-    position: absolute;
-    pointer-events: none;
-    bottom: 20px;
-    font-size: 16px;
-    transition: all 0.3s ease;
+.input-data label {
+  position: absolute;
+  pointer-events: none;
+  bottom: 20px;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-.textarea label{
-    width: 100%;
-    bottom: 40px;
-    background: #fff;
+.textarea label {
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
 }
 
-.input-data .underline{
-    position: absolute;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
+.input-data .underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
 }
 
-.input-data .underline:before{
-    position: absolute;
-    content: "";
-    height: 2px;
-    width: 100%;
-    background: #3498db;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.3s ease;
+.input-data .underline:before {
+  position: absolute;
+  content: '';
+  height: 2px;
+  width: 100%;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
 }
 
 .input-data input:focus ~ .underline:before,
 .input-data input:valid ~ .underline:before,
 .textarea textarea:focus ~ .underline:before,
-.textarea textarea:valid ~ .underline:before{
-    transform: scale(1);
+.textarea textarea:valid ~ .underline:before {
+  transform: scale(1);
 }
 
 @media (max-width: 1000px) {
-    .content-container {
-        margin: auto;
-    }
+  .content-container {
+    margin: auto;
+  }
 }
 
 select {
-    appearance: none;
-    outline: 10px red;
-    border: 0;
-    box-shadow: none;
-    flex: 1;
-    padding: 0 1em;
-    color: white;
-    background-color: #022f50;
-    cursor: pointer;
+  appearance: none;
+  outline: 10px red;
+  border: 0;
+  box-shadow: none;
+  flex: 1;
+  padding: 0 1em;
+  color: white;
+  background-color: #022f50;
+  cursor: pointer;
 }
 
 select::-ms-expand {
-    display: none;
+  display: none;
 }
 
 .select {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    border-radius: .25em;
-    overflow: hidden;
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: 0.25em;
+  overflow: hidden;
 }
 
 .select::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1em;
-    background-color: #c14fc0;
-    transition: .25s all ease;
-    pointer-events: none;
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: #c14fc0;
+  transition: 0.25s all ease;
+  pointer-events: none;
 }
 
 .select:hover::after {
-    color: #f39c12;
+  color: #f39c12;
 }
 
 .submit-btn {
-    width: 50%;
-    height: 46px;
-    margin: auto;
-    background-color: #c14fc0;
-    color: white;
-    border-radius: 8px;
-    border: 0;
+  width: 50%;
+  height: 46px;
+  margin: auto;
+  background-color: #c14fc0;
+  color: white;
+  border-radius: 8px;
+  border: 0;
 
-    &:hover {
-        background-color: #f39c12;
-        cursor: pointer ;
-        transition: all 0.2s;
-    }
+  &:hover {
+    background-color: #f39c12;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
 }
 
 /* HTML: <div class="loader"></div> */
 .loader {
-    width: 108px;
-    height: 60px;
-    color: #269af2;
-    --c: radial-gradient(farthest-side,currentColor 96%,#0000);
-    background:
-            var(--c) 100% 100% /30% 60%,
-            var(--c) 70%  0    /50% 100%,
-            var(--c) 0    100% /36% 68%,
-            var(--c) 27%  18%  /26% 40%,
-            linear-gradient(currentColor 0 0) bottom/67% 58%;
-    background-repeat: no-repeat;
-    position: relative;
+  width: 108px;
+  height: 60px;
+  color: #269af2;
+  --c: radial-gradient(farthest-side, currentColor 96%, #0000);
+  background:
+    var(--c) 100% 100% /30% 60%,
+    var(--c) 70% 0 /50% 100%,
+    var(--c) 0 100% /36% 68%,
+    var(--c) 27% 18% /26% 40%,
+    linear-gradient(currentColor 0 0) bottom/67% 58%;
+  background-repeat: no-repeat;
+  position: relative;
 }
 .loader:after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: inherit;
-    opacity: 0.4;
-    animation: l7 1s infinite;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.4;
+  animation: l7 1s infinite;
 }
 @keyframes l7 {
-    to {transform:scale(1.8);opacity:0}
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
 }
 
 .loader-text {
-    margin-top: 20px;
-    color: white;
+  margin-top: 20px;
+  color: white;
 }

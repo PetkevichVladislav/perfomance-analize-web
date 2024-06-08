@@ -1,6 +1,6 @@
-export interface TextInputParams{
-    id: string,
-    value?: string | number,
-    name?: string;
-    onChange: (value: string | number) => void;
+export interface TextInputParams {
+  id: string;
+  value?: string | number;
+  name?: string;
+  onChange: (value: string | number) => void;
 }

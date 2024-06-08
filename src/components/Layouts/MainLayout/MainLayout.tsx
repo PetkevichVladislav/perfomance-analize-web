@@ -1,10 +1,7 @@
-import { MainLayoutProps } from "./MainLayoutProps";
+import { MainLayoutProps } from './MainLayoutProps';
 
-const MainLayout: React.FC<MainLayoutProps> = ({children}) => {
-    return (
-    <>
-        {children}
-    </>);
-}
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  return <>{children}</>;
+};
 
 export default MainLayout;

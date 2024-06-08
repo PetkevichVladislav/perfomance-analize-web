@@ -1,0 +1,20 @@
+{
+  "singleQuote": true,
+  "printWidth": 80,
+  "importOrder": [
+    "^react(.*)$",
+    "^next(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^[.]{1}/",
+    "^[.]{2}/"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": [
+    "jsx",
+    "typescript",
+    "classProperties",
+    "decorators-legacy"
+  ]
+}

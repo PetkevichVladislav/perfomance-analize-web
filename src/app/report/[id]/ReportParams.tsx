@@ -1,3 +1,3 @@
-export interface ReportParams{
-    params: {id: string}
+export interface ReportParams {
+  params: { id: string };
 }
