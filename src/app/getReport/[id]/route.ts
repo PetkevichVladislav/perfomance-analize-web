@@ -18,5 +18,11 @@ export async function GET(_request: NextRequest, context: Context) {
       seo: 91,
     },
     metrics: { INP: 0, FCP: 550, LCP: 44600, TBT: 8450, CLS: 0.266 },
+    audits: [{
+      message: '',
+      estimation: '',
+      recommendation: ''
+    }],
+    money: {}
   });
 }
