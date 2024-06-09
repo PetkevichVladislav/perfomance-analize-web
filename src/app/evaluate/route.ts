@@ -14,10 +14,10 @@ export async function POST(request: NextRequest) {
     data.ads +
     '&visitorQuanity=' +
     data.visitors;
-  console.log('url', urlString);
-  console.log('api url', process.env.API_URL)
+  console.log('url string', urlString);
+  console.log('api url', process.env.API_URL);
   const dataResponse = await fetch(
-      process.env.API_URL + `/api/performance-analyze-report?${urlString}`,
+    process.env.API_URL + `/api/performance-analyze-report?${urlString}`,
   );
   return Response.json(dataResponse);
 }

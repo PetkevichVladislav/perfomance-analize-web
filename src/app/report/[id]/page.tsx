@@ -196,7 +196,7 @@ export default function Report({ params }: ReportParams) {
                     aria-controls={`${index}-content`}
                     id={`${index}-header`}
                   >
-                    <Typography sx={{ width: '40%', flexShrink: 0 }}>
+                    <Typography sx={{ width: '60%', flexShrink: 0 }}>
                       {task.message}
                     </Typography>
                     <Typography sx={{ color: 'text.secondary' }}>
@@ -204,7 +204,18 @@ export default function Report({ params }: ReportParams) {
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography>{task.recommendation}</Typography>
+                    <Typography>
+                      {task.recommendation
+                        .replaceAll(':', '')
+                        .split('**')
+                        .filter((i) => i !== '')
+                        .map((item, index) => {
+                          if (!(index % 2)) {
+                            return <h3>{item}</h3>;
+                          }
+                          return <Typography>{item}</Typography>;
+                        })}
+                    </Typography>
                   </AccordionDetails>
                 </Accordion>
               );

@@ -55,7 +55,7 @@ const MainPage: React.FC = () => {
 
   const sendRequest = async (advice: IReport): Promise<void> => {
     setIsProcessing(true);
-    const id = '3f8a74f6-6b86-4fa9-8075-cc03e5b05ccc' || uuidv4();
+    const id = '1d68df2d-96a6-4854-b9da-4d3abfb0046a' || uuidv4();
     try {
       const response = await fetch('/evaluate', {
         method: 'POST',

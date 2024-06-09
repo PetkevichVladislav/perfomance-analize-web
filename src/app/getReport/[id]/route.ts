@@ -10,8 +10,7 @@ export async function GET(_request: NextRequest, context: Context) {
   console.log(context.params.id);
 
   const data = await fetch(
-      process.env.API_URL + '/api/get-report?guid=' +
-      context.params.id,
+    process.env.API_URL + '/api/get-report?guid=' + context.params.id,
   );
   const lambdaReport = await data.json();
 
@@ -21,46 +20,63 @@ export async function GET(_request: NextRequest, context: Context) {
     performanceScores: [
       {
         name: 'performance',
-        value: lambdaReport.report.performance,
+        value: Math.floor(lambdaReport.performance),
       },
       {
         name: 'accessibility',
-        value: lambdaReport.report.accessibility,
+        value: lambdaReport.accessibility,
       },
       {
         name: 'best practices',
-        value: lambdaReport.report.bestpractices,
+        value: lambdaReport.bestPractices,
       },
       {
         name: 'seo',
-        value: lambdaReport.report.seo,
+        value: lambdaReport.seo,
+      },
+    ],
+    money: [
+      {
+        name: 'Work Cost',
+        value: lambdaReport.money.workCost + ' $',
+      },
+      {
+        name: 'ADS income increase',
+        value: lambdaReport.money.potentialIncomeIncrease + ' $',
+      },
+      {
+        name: 'Potential Revenue Gain',
+        value: lambdaReport.money.potentialRevenueGain + ' %',
       },
     ],
     vitalsMetrics: [
       {
-        name: 'Interaction to Next Paint (INP)',
-        value: 0,
-        description:
-          'Measures the latency of user interactions with the web page. A lower value indicates a more responsive experience.',
-        color: 'green', // Assuming 0 is excellent for INP
-      },
-      {
         name: 'First Contentful Paint (FCP)',
-        value: 550,
+        value: lambdaReport.metrics.FCP || '-',
         description:
           'Represents the time it takes for the first piece of content to be rendered on the screen. It helps gauge the loading speed perceived by users.',
-        color: 550 < 1000 ? 'green' : 550 < 3000 ? 'orange' : 'red',
+        color:
+          lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 1000
+            ? 'green'
+            : lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 3000
+              ? 'orange'
+              : 'red',
       },
       {
         name: 'Largest Contentful Paint (LCP)',
-        value: 44600,
+        value: lambdaReport.metrics.LCP,
         description:
           'Indicates the render time of the largest image or text block visible within the viewport, measuring how quickly the main content is loaded.',
-        color: 44600 < 2500 ? 'green' : 44600 < 4000 ? 'orange' : 'red',
+        color:
+          lambdaReport.metrics.LCP?.replace(/^\D+/g, '') < 2500
+            ? 'green'
+            : lambdaReport.metrics.LCP?.replace(/^\D+/g, '') < 4000
+              ? 'orange'
+              : 'red',
       },
       {
         name: 'Total Blocking Time (TBT)',
-        value: 8450,
+        value: lambdaReport.metrics.TBT || '-',
         description:
           'Calculates the total amount of time that a page is blocked from responding to user input, from First Contentful Paint (FCP) until Time to Interactive (TTI).',
         color: 8450 < 300 ? 'green' : 8450 < 600 ? 'orange' : 'red',
@@ -74,44 +90,19 @@ export async function GET(_request: NextRequest, context: Context) {
       },
     ],
     audits: [
-      {
-        message: 'Minimize render-blocking JavaScript and CSS',
-        estimation: '16 hours',
-        recommendation:
-          'Defer loading of non-critical JavaScript and inline critical CSS.',
-      },
-      {
-        message: 'Enable browser caching for static assets',
-        estimation: '4 hours',
-        recommendation:
-          'Set appropriate cache headers for static assets like images, CSS, and JavaScript files.',
-      },
-      {
-        message: 'Implement server-side rendering (SSR)',
-        estimation: '24 hours',
-        recommendation:
-          'Use SSR to render initial page content on the server, reducing time to first byte (TTFB).',
-      },
-      {
-        message: 'Reduce the number of HTTP requests',
-        estimation: '12 hours',
-        recommendation:
-          'Combine multiple CSS and JavaScript files into a single file and use image sprites.',
-      },
-    ],
-    money: [
-      {
-        name: 'Work Cost',
-        value: '1000 $',
-      },
-      {
-        name: 'ADS income increase',
-        value: '100000 $',
-      },
-      {
-        name: 'Potential Revenue Gain',
-        value: '10000 $',
-      },
+      ...lambdaReport.tasks.map(
+        (task: {
+          audit: { title: string };
+          gptEstimation: string;
+          gptTaskDescription: string;
+        }) => {
+          return {
+            message: task.audit.title,
+            estimation: task.gptEstimation + 'h',
+            recommendation: task.gptTaskDescription,
+          };
+        },
+      ),
     ],
   });
 }
