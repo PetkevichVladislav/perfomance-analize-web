@@ -51,7 +51,7 @@
 .performance-card {
   max-width: 80%;
   width: 300px;
-  margin: 10px;
+  margin: 0 10px 10px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -72,4 +72,16 @@
 .performance-name {
   font-size: 20px;
   padding-top: 15px;
+}
+
+.performance-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.performance-item {
+  width: 49%;
+  flex-shrink: 0;
+  min-width: 600px;
+  flex-grow: 1;
 }

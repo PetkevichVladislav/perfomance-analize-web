@@ -9,15 +9,70 @@ interface Context {
 export async function GET(_request: NextRequest, context: Context) {
   console.log(context.params.id);
 
-  await new Promise((resolve) => setTimeout(() => resolve(''), 0));
+  const data = await fetch(
+    'https://sheet-ai-function-get-report.azurewebsites.net/api/get-report?guid=' +
+      context.params.id,
+  );
+  const lambdaReport = await data.json();
+
+  console.log(lambdaReport);
+
   return Response.json({
-    performance: {
-      performance: 64,
-      accessibility: 20,
-      practices: 100,
-      seo: 91,
-    },
-    metrics: { INP: 0, FCP: 550, LCP: 44600, TBT: 8450, CLS: 0.266 },
+    performanceScores: [
+      {
+        name: 'performance',
+        value: lambdaReport.report.performance,
+      },
+      {
+        name: 'accessibility',
+        value: lambdaReport.report.accessibility,
+      },
+      {
+        name: 'best practices',
+        value: lambdaReport.report.bestpractices,
+      },
+      {
+        name: 'seo',
+        value: lambdaReport.report.seo,
+      },
+    ],
+    vitalsMetrics: [
+      {
+        name: 'Interaction to Next Paint (INP)',
+        value: 0,
+        description:
+          'Measures the latency of user interactions with the web page. A lower value indicates a more responsive experience.',
+        color: 'green', // Assuming 0 is excellent for INP
+      },
+      {
+        name: 'First Contentful Paint (FCP)',
+        value: 550,
+        description:
+          'Represents the time it takes for the first piece of content to be rendered on the screen. It helps gauge the loading speed perceived by users.',
+        color: 550 < 1000 ? 'green' : 550 < 3000 ? 'orange' : 'red',
+      },
+      {
+        name: 'Largest Contentful Paint (LCP)',
+        value: 44600,
+        description:
+          'Indicates the render time of the largest image or text block visible within the viewport, measuring how quickly the main content is loaded.',
+        color: 44600 < 2500 ? 'green' : 44600 < 4000 ? 'orange' : 'red',
+      },
+      {
+        name: 'Total Blocking Time (TBT)',
+        value: 8450,
+        description:
+          'Calculates the total amount of time that a page is blocked from responding to user input, from First Contentful Paint (FCP) until Time to Interactive (TTI).',
+        color: 8450 < 300 ? 'green' : 8450 < 600 ? 'orange' : 'red',
+      },
+      {
+        name: 'Cumulative Layout Shift (CLS)',
+        value: 0.266,
+        description:
+          'Quantifies the amount of unexpected layout shifts that occur during the lifespan of the page. A lower value means a more stable and visually appealing experience.',
+        color: 0.266 < 0.1 ? 'green' : 0.266 < 0.25 ? 'orange' : 'red',
+      },
+    ],
     audits: [
       {
         message: 'Minimize render-blocking JavaScript and CSS',

@@ -17,9 +17,9 @@ import { Loader } from '@/components/Loader/Loader';
 
 interface IReport {
   url: string;
-  visitors: string;
-  views: string;
-  ads: string;
+  visitors: number;
+  views: number;
+  ads: number;
   type: string;
 }
 
@@ -28,9 +28,9 @@ const MainPage: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [advice, setAdvice] = useState<IReport>({
     url: '',
-    visitors: '',
-    views: '',
-    ads: '',
+    visitors: 20000,
+    views: 5,
+    ads: 3,
     type: 'mobile',
   });
 
@@ -63,7 +63,7 @@ const MainPage: React.FC = () => {
       });
       const data = await response.json();
       console.log('Success:', data);
-      window.location.href = '/report/123';
+      window.location.href = '/report/3f8a74f6-6b86-4fa9-8075-cc03e5b05ccc';
     } catch (error) {
       console.error('Error:', error);
     }
@@ -90,6 +90,7 @@ const MainPage: React.FC = () => {
                   onChange={fieldChangeHandler('url')}
                   sx={{ marginBottom: '20px' }}
                   size="small"
+                  value={advice.url}
                 />
                 <TextField
                   id="input-visitors"
@@ -99,6 +100,7 @@ const MainPage: React.FC = () => {
                   sx={{ marginBottom: '20px' }}
                   size="small"
                   type="number"
+                  value={advice.visitors}
                 />
                 <TextField
                   id="input-views"
@@ -108,6 +110,7 @@ const MainPage: React.FC = () => {
                   sx={{ marginBottom: '20px' }}
                   size="small"
                   type="number"
+                  value={advice.views}
                 />
                 <TextField
                   id="input-ads"
@@ -117,6 +120,7 @@ const MainPage: React.FC = () => {
                   onChange={fieldChangeHandler('ads')}
                   sx={{ marginBottom: '20px' }}
                   type="number"
+                  value={advice.ads}
                 />
                 <InputLabel id="demo-simple-select-label">
                   Device Type

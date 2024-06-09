@@ -65,77 +65,87 @@ export default function Report({ params }: ReportParams) {
       setExpandedTask(isExpanded ? panel : false);
     };
 
-  const metricsKeys = Object.keys(data.metrics);
-  const performanceKeys = Object.keys(data.performance);
   return (
     <Box className="report-container">
       <Box className="report-block">
-        <Box className="report-block-title">Performance Scores</Box>
-        <Box className="performance-metrics">
-          {performanceKeys.map((performance) => {
-            return (
-              <Card key={performance} className="performance-card">
-                <CardContent
-                  sx={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <Box
-                    className="performance-score"
-                    sx={{
-                      color:
-                        data.performance[performance] < 50
-                          ? 'hsla(11,100%,52.2%,1)'
-                          : data.performance[performance] < 80
-                            ? 'hsla(39,100%,68%,1)'
-                            : 'hsl(148.09deg 51.4% 51.6%)',
-                    }}
-                  >
-                    {data.performance[performance]}
-                  </Box>
-                  <Box className="performance-name">
-                    {performance.toUpperCase()}
-                  </Box>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </Box>
+        <Box className="report-block-title">Revenue Savings</Box>
       </Box>
-      <Box className="report-block">
-        <Box className="report-block-title">Web Vitals Metrics</Box>
-        <Box className="main-metrics">
-          {metricsKeys.map((metric) => {
-            return (
-              <Accordion
-                key={metric}
-                expanded={expandedMetric === metric}
-                onChange={handleChangeMetric(metric)}
-              >
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls={`${metric}-content`}
-                  id={`${metric}-header`}
-                >
-                  <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                    {metric}
-                  </Typography>
-                  <Typography sx={{ color: 'text.secondary' }}>
-                    {data.metrics[metric]}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    metric description metric description metric description
-                    metric description metric description
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            );
-          })}
+      <Box className="performance-wrapper">
+        <Box className="report-block performance-item">
+          <Box className="report-block-title">Performance Scores</Box>
+          <Box className="performance-metrics">
+            {data.performanceScores.map(
+              (metric: { name: string; value: number }, index: number) => {
+                return (
+                  <Card key={index} className="performance-card">
+                    <CardContent
+                      sx={{
+                        alignItems: 'center',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                      }}
+                    >
+                      <Box
+                        className="performance-score"
+                        sx={{
+                          color:
+                            Number(metric.value) < 50
+                              ? 'hsla(11,100%,52.2%,1)'
+                              : Number(metric.value) < 80
+                                ? 'hsla(39,100%,68%,1)'
+                                : 'hsl(148.09deg 51.4% 51.6%)',
+                        }}
+                      >
+                        {metric.value}
+                      </Box>
+                      <Box className="performance-name">{metric.name}</Box>
+                    </CardContent>
+                  </Card>
+                );
+              },
+            )}
+          </Box>
+        </Box>
+        <Box className="report-block performance-item">
+          <Box className="report-block-title">Performance Metrics</Box>
+          <Box className="main-metrics">
+            {data.vitalsMetrics.map(
+              (
+                metric: {
+                  name: string;
+                  value: number;
+                  description: string;
+                  color: string;
+                },
+                index: number,
+              ) => {
+                return (
+                  <Accordion
+                    key={index}
+                    expanded={expandedMetric === `${index}`}
+                    onChange={handleChangeMetric(`${index}`)}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls={`${index}-content`}
+                      id={`${index}-header`}
+                    >
+                      <Typography sx={{ width: '60%', flexShrink: 0 }}>
+                        {metric.name}
+                      </Typography>
+                      <Typography sx={{ color: metric.color }}>
+                        {metric.value}
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>{metric.description}</Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                );
+              },
+            )}
+          </Box>
         </Box>
       </Box>
       <Box className="report-block">
@@ -176,9 +186,6 @@ export default function Report({ params }: ReportParams) {
             },
           )}
         </Box>
-      </Box>
-      <Box className="report-block">
-        <Box className="report-block-title">Revenue Savings</Box>
       </Box>
     </Box>
   );
