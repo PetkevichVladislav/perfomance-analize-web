@@ -65,9 +65,9 @@ export async function GET(_request: NextRequest, context: Context) {
         description:
           'Represents the time it takes for the first piece of content to be rendered on the screen. It helps gauge the loading speed perceived by users.',
         color:
-          lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 1000
+          lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 1
             ? 'green'
-            : lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 3000
+            : lambdaReport.metrics.FCP?.replace(/^\D+/g, '') < 3
               ? 'orange'
               : 'red',
       },
