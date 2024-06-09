@@ -12,7 +12,7 @@ export async function GET(_request: NextRequest, context: Context) {
   await new Promise((resolve) =>
     setTimeout(
       () => resolve(''),
-      context.params.id === '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc1'
+      context.params.id === '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc3'
         ? 2000
         : 7000,
     ),

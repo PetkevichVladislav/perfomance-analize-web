@@ -57,7 +57,7 @@ const MainPage: React.FC = () => {
     setIsProcessing(true);
     const id =
       advice.url === 'https://store.ee.co.uk'
-        ? '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc1'
+        ? '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc3'
         : uuidv4();
     try {
       const response = await fetch('/evaluate', {
