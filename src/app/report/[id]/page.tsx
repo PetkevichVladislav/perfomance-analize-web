@@ -211,9 +211,9 @@ export default function Report({ params }: ReportParams) {
                         .filter((i) => i !== '')
                         .map((item, index) => {
                           if (!(index % 2)) {
-                            return <h3>{item}</h3>;
+                            return <h3 key={index}>{item}</h3>;
                           }
-                          return <Typography>{item}</Typography>;
+                          return <Typography key={index}>{item}</Typography>;
                         })}
                     </Typography>
                   </AccordionDetails>
