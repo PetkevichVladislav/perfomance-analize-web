@@ -10,7 +10,7 @@ export async function GET(_request: NextRequest, context: Context) {
   console.log(context.params.id);
 
   const data = await fetch(
-    'https://sheet-ai-function-get-report.azurewebsites.net/api/get-report?guid=' +
+      process.env.API_URL + '/api/get-report?guid=' +
       context.params.id,
   );
   const lambdaReport = await data.json();

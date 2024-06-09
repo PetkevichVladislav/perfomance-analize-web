@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import RocketIcon from '@mui/icons-material/Rocket';
 import { Loader } from '@/components/Loader/Loader';
+// @ts-ignore
+import { v4 as uuidv4 } from 'uuid';
 
 interface IReport {
   url: string;
@@ -53,17 +55,19 @@ const MainPage: React.FC = () => {
 
   const sendRequest = async (advice: IReport): Promise<void> => {
     setIsProcessing(true);
+    const id = '3f8a74f6-6b86-4fa9-8075-cc03e5b05ccc' || uuidv4();
     try {
       const response = await fetch('/evaluate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(advice),
+        body: JSON.stringify({ id: id, ...advice }),
       });
       const data = await response.json();
       console.log('Success:', data);
-      window.location.href = '/report/3f8a74f6-6b86-4fa9-8075-cc03e5b05ccc';
+      window.location.href = '/report/' + id;
     } catch (error) {
       console.error('Error:', error);
+      window.location.href = '/report/' + id;
     }
   };
 
