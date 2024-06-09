@@ -99,6 +99,19 @@ export async function GET(_request: NextRequest, context: Context) {
           'Combine multiple CSS and JavaScript files into a single file and use image sprites.',
       },
     ],
-    money: {},
+    money: [
+      {
+        name: 'Work Cost',
+        value: '1000 $',
+      },
+      {
+        name: 'ADS income increase',
+        value: '100000 $',
+      },
+      {
+        name: 'Potential Revenue Gain',
+        value: '10000 $',
+      },
+    ],
   });
 }

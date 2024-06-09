@@ -41,7 +41,8 @@
   margin-top: 20px;
 }
 
-.performance-metrics {
+.performance-metrics,
+.money-metrics {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -84,4 +85,21 @@
   flex-shrink: 0;
   min-width: 600px;
   flex-grow: 1;
+}
+
+.money-metrics {
+  flex-wrap: wrap;
+}
+
+.money-card {
+  margin: 10px;
+  width: 30%;
+  flex-grow: 1;
+  max-width: 90%;
+  flex-shrink: 0;
+  min-width: 400px;
+}
+
+.money-score {
+  color: hsl(120.74deg 51.4% 51.6%);
 }

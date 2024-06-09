@@ -69,6 +69,29 @@ export default function Report({ params }: ReportParams) {
     <Box className="report-container">
       <Box className="report-block">
         <Box className="report-block-title">Revenue Savings</Box>
+        <Box className="money-metrics">
+          {data.money.map(
+            (metric: { name: string; value: number }, index: number) => {
+              return (
+                <Card key={index} className="money-card">
+                  <CardContent
+                    sx={{
+                      alignItems: 'center',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <Box className="money-score">{metric.value}</Box>
+                    <Box className="performance-name">
+                      {metric.name.toUpperCase()}
+                    </Box>
+                  </CardContent>
+                </Card>
+              );
+            },
+          )}
+        </Box>
       </Box>
       <Box className="performance-wrapper">
         <Box className="report-block performance-item">
@@ -99,7 +122,9 @@ export default function Report({ params }: ReportParams) {
                       >
                         {metric.value}
                       </Box>
-                      <Box className="performance-name">{metric.name.toUpperCase()}</Box>
+                      <Box className="performance-name">
+                        {metric.name.toUpperCase()}
+                      </Box>
                     </CardContent>
                   </Card>
                 );
