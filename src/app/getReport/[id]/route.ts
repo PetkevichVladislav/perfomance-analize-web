@@ -9,6 +9,15 @@ interface Context {
 export async function GET(_request: NextRequest, context: Context) {
   console.log(context.params.id);
 
+  await new Promise((resolve) =>
+    setTimeout(
+      () => resolve(''),
+      context.params.id === '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc1'
+        ? 2000
+        : 7000,
+    ),
+  );
+
   const data = await fetch(
     process.env.API_URL + '/api/get-report?guid=' + context.params.id,
   );
@@ -37,16 +46,16 @@ export async function GET(_request: NextRequest, context: Context) {
     ],
     money: [
       {
-        name: 'Work Cost',
+        name: 'Optimisation Cost',
         value: lambdaReport.money.workCost + ' $',
-      },
-      {
-        name: 'ADS income increase',
-        value: lambdaReport.money.potentialIncomeIncrease + ' $',
       },
       {
         name: 'Potential Revenue Gain',
         value: lambdaReport.money.potentialRevenueGain + ' %',
+      },
+      {
+        name: 'Annual ADS income increase',
+        value: lambdaReport.money.potentialIncomeIncrease + ' $',
       },
     ],
     vitalsMetrics: [
@@ -79,14 +88,24 @@ export async function GET(_request: NextRequest, context: Context) {
         value: lambdaReport.metrics.TBT || '-',
         description:
           'Calculates the total amount of time that a page is blocked from responding to user input, from First Contentful Paint (FCP) until Time to Interactive (TTI).',
-        color: 8450 < 300 ? 'green' : 8450 < 600 ? 'orange' : 'red',
+        color:
+          lambdaReport.metrics.TBT?.replace(/^\D+/g, '') < 300
+            ? 'green'
+            : lambdaReport.metrics.TBT?.replace(/^\D+/g, '') < 600
+              ? 'orange'
+              : 'red',
       },
       {
         name: 'Cumulative Layout Shift (CLS)',
-        value: 0.266,
+        value: lambdaReport.metrics.CLS || '-',
         description:
           'Quantifies the amount of unexpected layout shifts that occur during the lifespan of the page. A lower value means a more stable and visually appealing experience.',
-        color: 0.266 < 0.1 ? 'green' : 0.266 < 0.25 ? 'orange' : 'red',
+        color:
+          lambdaReport.metrics.CLS?.replace(/^\D+/g, '') < 0.1
+            ? 'green'
+            : lambdaReport.metrics.CLS?.replace(/^\D+/g, '') < 0.25
+              ? 'orange'
+              : 'red',
       },
     ],
     audits: [

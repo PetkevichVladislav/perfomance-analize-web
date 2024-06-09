@@ -27,7 +27,7 @@ interface IReport {
 const MainPage: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [advice, setAdvice] = useState<IReport>({
-    url: '',
+    url: 'https://store.ee.co.uk',
     visitors: 20000,
     views: 5,
     ads: 3,
@@ -55,7 +55,10 @@ const MainPage: React.FC = () => {
 
   const sendRequest = async (advice: IReport): Promise<void> => {
     setIsProcessing(true);
-    const id = '1d68df2d-96a6-4854-b9da-4d3abfb0046a' || uuidv4();
+    const id =
+      advice.url === 'https://store.ee.co.uk'
+        ? '3f8a74f6-6b86-4fa9-8075-cc03e5b05cc1'
+        : uuidv4();
     try {
       const response = await fetch('/evaluate', {
         method: 'POST',
