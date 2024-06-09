@@ -1,7 +1,6 @@
 'use client';
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import './MainPage.scss';
-import { useRouter } from 'next/navigation';
 import {
   Box,
   Button,
@@ -24,7 +23,6 @@ interface IReport {
 }
 
 const MainPage: React.FC = () => {
-  const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [advice, setAdvice] = useState<IReport>({
     url: '',
