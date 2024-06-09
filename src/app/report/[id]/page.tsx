@@ -20,7 +20,8 @@ export interface ReportParams {
 }
 
 export default function Report({ params }: ReportParams) {
-  const [expanded, setExpanded] = useState<string | false>(false);
+  const [expandedMetric, setExpandedMetric] = useState<string | false>(false);
+  const [expandedTask, setExpandedTask] = useState<string | false>(false);
   const { isPending, error, data } = useQuery({
     queryKey: ['report'],
     queryFn: () =>
@@ -32,30 +33,37 @@ export default function Report({ params }: ReportParams) {
 
   if (isPending) {
     return (
-      <Box
-        justifyContent="center"
-        alignItems="center"
-        display="flex"
-        sx={{
-          width: '100%',
-          minHeight: '98vh',
-          backgroundColor: '#053052',
-          flexDirection: 'column',
-        }}
-      >
-        <Loader />
-      </Box>
+        <Box
+            justifyContent="center"
+            alignItems="center"
+            display="flex"
+            sx={{
+                width: '100%',
+                height: '98vh',
+                padding: '30px'
+            }}
+        >
+            <Box sx={{width: '40%'}}>
+                <Loader/>
+            </Box>
+            <Box className="container-image"></Box>
+        </Box>
     );
   }
 
-  if (error) {
-    window.location.href = '/report/' + params.id;
+    if (error) {
+        window.location.href = '/report/' + params.id;
   }
 
-  const handleChange =
+  const handleChangeMetric =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
+      setExpandedMetric(isExpanded ? panel : false);
     };
+
+    const handleChangeTask =
+        (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+            setExpandedTask(isExpanded ? panel : false);
+        };
 
   const metricsKeys = Object.keys(data.metrics);
   const performanceKeys = Object.keys(data.performance);
@@ -104,8 +112,8 @@ export default function Report({ params }: ReportParams) {
             return (
               <Accordion
                 key={metric}
-                expanded={expanded === metric}
-                onChange={handleChange(metric)}
+                expanded={expandedMetric === metric}
+                onChange={handleChangeMetric(metric)}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -127,6 +135,36 @@ export default function Report({ params }: ReportParams) {
           })}
         </Box>
       </Box>
+        <Box className="report-block">
+            <Box className="report-block-title">Tasks</Box>
+            <Box className="main-metrics">
+                {data.audits.map((task: {message: string; estimation: string; recommendation: string; }, index: number) => {
+                    return (
+                        <Accordion
+                            key={task.recommendation}
+                            expanded={expandedTask === `${index}`}
+                            onChange={handleChangeTask(`${index}`)}
+                        >
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls={`${index}-content`}
+                                id={`${index}-header`}
+                            >
+                                <Typography sx={{ width: '40%', flexShrink: 0 }}>
+                                    {task.message}
+                                </Typography>
+                                <Typography sx={{ color: 'text.secondary' }}>
+                                    {task.estimation}
+                                </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>{task.recommendation}</Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    );
+                })}
+            </Box>
+        </Box>
       <Box className="report-block">
         <Box className="report-block-title">Revenue Savings</Box>
       </Box>
