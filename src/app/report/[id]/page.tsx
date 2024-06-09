@@ -99,7 +99,7 @@ export default function Report({ params }: ReportParams) {
                       >
                         {metric.value}
                       </Box>
-                      <Box className="performance-name">{metric.name}</Box>
+                      <Box className="performance-name">{metric.name.toUpperCase()}</Box>
                     </CardContent>
                   </Card>
                 );
