@@ -10,6 +10,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from '@mui/material';
 import RocketIcon from '@mui/icons-material/Rocket';
 import { Loader } from '@/components/Loader/Loader';
@@ -149,6 +150,16 @@ const MainPage: React.FC = () => {
                   Get report
                 </Button>
               </form>
+            </CardContent>
+            <CardContent>
+              <Typography sx={{ color: '#1976d2' }}>
+                Dear User, Please do not change the URL field because our
+                application is very powerful and costs around $1 per request.
+                Additionally, processing can take up to 15 minutes. If you are
+                ready to wait, you can run a <i>custom</i> request and then read
+                our amazing generated preloader text. If you just want to see a
+                demo, please use the predefined URL.
+              </Typography>
             </CardContent>
           </Card>
         )}

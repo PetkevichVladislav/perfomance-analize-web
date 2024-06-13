@@ -46,16 +46,16 @@ export async function GET(_request: NextRequest, context: Context) {
     ],
     money: [
       {
-        name: 'Optimisation Cost',
-        value: lambdaReport.money.workCost + ' $',
-      },
-      {
         name: 'Potential Revenue Gain',
         value: lambdaReport.money.potentialRevenueGain + ' %',
       },
       {
         name: 'Annual ADS income increase',
         value: lambdaReport.money.potentialIncomeIncrease + ' $',
+      },
+      {
+        name: 'Optimisation Cost',
+        value: lambdaReport.money.workCost + ' $',
       },
     ],
     vitalsMetrics: [

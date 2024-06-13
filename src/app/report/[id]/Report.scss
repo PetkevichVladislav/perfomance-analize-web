@@ -85,6 +85,10 @@
   flex-shrink: 0;
   min-width: 600px;
   flex-grow: 1;
+
+  @media (max-width: 1000px) {
+    min-width: 100%;
+  }
 }
 
 .money-metrics {
