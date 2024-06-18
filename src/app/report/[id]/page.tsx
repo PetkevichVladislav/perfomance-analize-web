@@ -217,6 +217,7 @@ export default function Report({ params }: ReportParams) {
                     <Typography>
                       {task.recommendation
                         .replaceAll(':', '')
+                        .replaceAll(/\d+\./g, '')
                         .split('**')
                         .filter((i) => i !== '')
                         .map((item, index) => {
