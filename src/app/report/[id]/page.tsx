@@ -43,19 +43,19 @@ export default function Report({ params }: ReportParams) {
           padding: '30px',
         }}
       >
+          <Box
+              display="flex"
+              sx={{
+                  width: '40%',
+                  height: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+              }}
+          >
+              <Box className="container-image"></Box>
+          </Box>
         <Box sx={{ width: '40%' }}>
           <Loader />
-        </Box>
-        <Box
-          display="flex"
-          sx={{
-            width: '40%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Box className="container-image"></Box>
         </Box>
       </Box>
     );

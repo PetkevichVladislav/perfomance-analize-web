@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Revenue Rocket 🚀</title>
+        <title>Web Profit Enhancer 💰</title>
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
