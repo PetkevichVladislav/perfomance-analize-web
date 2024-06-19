@@ -26,6 +26,13 @@ export async function GET(_request: NextRequest, context: Context) {
   console.log(lambdaReport);
 
   return Response.json({
+    options: {
+      url: 'https://store.ee.co.uk',
+      visitors: 20000,
+      views: 5,
+      ads: 3,
+      type: 'mobile',
+    },
     performanceScores: [
       {
         name: 'performance',
