@@ -96,7 +96,7 @@
 }
 
 .money-card {
-  margin: 10px;
+  margin: 10px 20px;
   width: 30%;
   flex-grow: 1;
   max-width: 90%;
@@ -106,4 +106,13 @@
 
 .money-score {
   color: hsl(120.74deg 51.4% 51.6%);
+}
+
+.report-site-info {
+  color: black;
+  margin: 20px;
+}
+
+.option {
+  padding: 10px;
 }

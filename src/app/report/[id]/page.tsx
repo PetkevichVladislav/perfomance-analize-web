@@ -7,6 +7,7 @@ import {
   Box,
   Card,
   CardContent,
+  Divider,
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -43,17 +44,17 @@ export default function Report({ params }: ReportParams) {
           padding: '30px',
         }}
       >
-          <Box
-              display="flex"
-              sx={{
-                  width: '40%',
-                  height: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-              }}
-          >
-              <Box className="container-image"></Box>
-          </Box>
+        <Box
+          display="flex"
+          sx={{
+            width: '40%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Box className="container-image"></Box>
+        </Box>
         <Box sx={{ width: '40%' }}>
           <Loader />
         </Box>
@@ -77,6 +78,28 @@ export default function Report({ params }: ReportParams) {
 
   return (
     <Box className="report-container">
+      <Box className="report-block">
+        <Box className="report-block-title">Site info</Box>
+        <Card className="report-site-info">
+          <CardContent>
+            <Typography className="option">
+              <b>Site URL: </b> {data.options.url}
+            </Typography>
+            <Divider />
+            <Typography className="option">
+              <b>Visitors per month: </b> {data.options.visitors}
+            </Typography>
+            <Divider />
+            <Typography className="option">
+              <b>Page views per visit: </b> {data.options.views}
+            </Typography>
+            <Divider />
+            <Typography className="option">
+              <b>Ads per page: </b> {data.options.ads}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
       <Box className="report-block">
         <Box className="report-block-title">Revenue Savings</Box>
         <Box className="money-metrics">
