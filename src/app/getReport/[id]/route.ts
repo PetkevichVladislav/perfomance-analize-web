@@ -27,11 +27,10 @@ export async function GET(_request: NextRequest, context: Context) {
 
   return Response.json({
     options: {
-      url: 'https://store.ee.co.uk',
-      visitors: 20000,
-      views: 5,
-      ads: 3,
-      type: 'mobile',
+      url: lambdaReport.url || 'https://store.ee.co.uk',
+      visitors: lambdaReport.visitors || 20000,
+      views: lambdaReport.views || 5,
+      ads: lambdaReport.ads || 3
     },
     performanceScores: [
       {
